@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+ {% block body %}
+ <center>
+ <h3>O To jak przebiega Twoja dieta!!!</h3>
+ <br></br>
+ <table>
+                <tr>
+                <th>Dzień</th>
+                <th>Liczba kalorii</th>
+                <th>Białko w gramach </th>
+                <th>Węglowodany w gramach</th>
+                <th>Tłuszcze w gramach</th>
+            </tr>
+              {% for day in history %}
+            <tr>
+                <td> {{day.day}} </td>
+                <td> {{day.day_calories}} gram.</td>
+                <td> {{day.day_protein}} kcal.</td>
+                <td> {{day.day_carbs}} gram.</td>
+                <td> {{ day.fats }} gram.</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+</center>
+
+
+ {% endblock %}

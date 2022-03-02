@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+ {% block body %}
+ <h5>Dodaj co dzisiaj jadłeś</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type='submit' value="Ok">
+    </form>
+
+ {% endblock %}

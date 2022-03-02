@@ -1,0 +1,8 @@
+ {% extends 'base.html' %}
+ {% block body %}
+<form method="POST">
+    {% csrf_token %}
+    <h3>Czy jesteś pewny że chcesz usunąć {{ food }} ???</h3>
+    <input type="submit" value="Tak">
+</form>
+ {% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+ {% block body %}
+    {% if user.is_authenticated %}
+        <center><h1>Witaj {{ user.username }}!!!</h1></center>
+        <center><h3><a href='{% url "account_logout" %}'>Wyloguj się</a></h3>
+        <br>
+        {% if app_user %}
+        <h2> Masz ustawiony dzienny limit na {{ app_user.desirable_intake }} kalorii.
+         Do tej pory spożyłeś {{ calories }} kalorii.
+         Możesz jeszcze zjeść {{ cal_left}} kalorii</h2></center>
+        {% endif %}
+        <br>
+        <center>
+        <div>
+        <h3>Co już dzisiaj zjadłeś:</h3>
+
+
+
+        <table>
+            <tr>
+                <th>Posiłek</th>
+                <th>Waga</th>
+                <th>Kalorie</th>
+                <th>Białko</th>
+                <th>Węglowodany</th>
+                <th>Tłuszcze</th>
+                <th>Ilość</th>
+            </tr>
+            {% for food in app_user.foods.all %}
+            <tr>
+                <td> {{food.name}} </td>
+                <td> {{food.weight}} gram.</td>
+                <td> {{food.calories}} kcal.</td>
+                <td> {{food.protein}} gram.</td>
+                <td> {{ food.carbs }} gram.</td>
+                <td> {{ food.fats }} gram.</td>
+                <td> {{ food.quantity }} </td>
+                <td><a href="{% url 'update' food.id %}">Edytuj</a></td>
+                <td><a href="{% url 'delete' app_user.id food.id %}">Usuń</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+        </div>
+
+        <br>
+        <h3>Podsumowanie: Białko: {{ protein }} gram, Węglowodany: {{ carbs }} gram, Tłuszcze: {{ fats }} gram.</h3>
+
+        <br></br>
+        <h4><a href='{% url "add_history" %}'>Dodaj swoje dzisiejsze wyniki!</a></h5>
+         <br></br>
+        <h4><a href='{% url "del_all" %}'> Usuń wszystko!!!</a></h4>
+        <br></br>
+                <h3>Dodaj posiłki które zjadłeś</h3>
+            <form  method="POST">
+                {% csrf_token %}
+                {{ add_form.as_p }}
+                <input type="submit" value="Dodaj">
+            </form>
+                <br>
+
+        <h3>Jaką liczbę kalorii dziennie chcesz przyjmować???</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="OK">
+            </form>
+
+{% else %}
+<center><h1>Nie jesteś zalogowany. Zaloguj sie <a href='{% url "account_login" %}'>TUTAJ</a>,
+ lub złóż konto <a href = '{% url "account_signup" %}'>TUTAJ</a></h1></center>
+{% endif %}
+</center>
+ {% endblock %}

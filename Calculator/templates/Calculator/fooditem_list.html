@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+ {% block body %}
+<center>
+<div>
+<h3>Lista posiłków razem z kaloriami, białkiem idp.</h3>
+    {% for obj in object_list %}
+    <ul>
+        <li><a href='{% url "update" obj.id %}'>{{obj.name}}</a></li>
+        <li>Waga: {{ obj.weight }} gram</li>
+        <li>Kalorie: {{ obj.calories }} kcal</li>
+        <li>Białko: {{ obj.protein }} gram</li>
+        <li>Węglowodany: {{ obj.carbs }} gram</li>
+        <li>Tłuszcze: {{ obj.fats }} gram</li>
+
+    </ul>
+    <br>
+    {% endfor %}
+</div>
+</center>
+ {% endblock %}

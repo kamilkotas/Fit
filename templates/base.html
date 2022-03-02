@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+</head>
+<body>
+<div class="container-fluid well" id="home" style="display:block; padding-top:50px;">
+    <nav>
+        <ul>
+            <li><a href='{% url "home" %}'>Strona główna</a></li>
+            <li><a href='{% url "list" %}'>Lista posiłków</a></li>
+            <li><a href='{% url "food" %}'>Dodaj posiłek</a></li>
+            {% if user.is_authenticated %}
+            <li><a href='{% url "history" %}'>Historia odchudzania</a></li>
+            {% else %}
+            <li><a href='{% url "account_login" %}'>Zaloguj</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>
