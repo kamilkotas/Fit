@@ -86,10 +86,10 @@ def add_history(request):
             fats = 0
 
             for food in app_user.foods.all():
-                calories += food.calories
-                protein += food.protein
-                carbs += food.carbs
-                fats += food.fats
+                calories += food.calories * food.quantity
+                protein += food.protein * food.quantity
+                carbs += food.carbs * food.quantity
+                fats += food.fats * food.quantity
             History.objects.create(
                 day_calories=calories,
                 day_protein=protein,
